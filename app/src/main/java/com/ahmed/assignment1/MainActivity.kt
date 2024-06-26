@@ -1,20 +1,23 @@
 package com.ahmed.assignment1
-
+import Components.DisplayFloatingActionBtn
+import Components.IndividualRow
+import TodoItem
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -25,6 +28,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.RoundRect
@@ -49,10 +53,20 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-//TODO:- Task: Create a composable function for the top bar with the application name
+
+/**
+ * the function creates the app entry point by calling individual UI Components
+ * The components are in Component package
+ *          -contains :
+ *              -Buttons
+ *              -UI view Functions
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainUI() {
+    var isDoen by remember {
+        mutableStateOf(false)
+    }
     var showBSheet  by remember {
         mutableStateOf(value = false)
     }
@@ -60,40 +74,39 @@ fun MainUI() {
         Scaffold(topBar = {
             CenterAlignedTopAppBar(title = {
                 Text(text = "Todo")
-            }, colors = TopAppBarDefaults.topAppBarColors(containerColor = PurpleGrey80, contentColorFor(
+            }, colors = TopAppBarDefaults.topAppBarColors(containerColor = PurpleGrey80,
+                contentColorFor(
                 PurpleGrey80)),)
         }, floatingActionButton =
         {
-          FloatingActionBtn(isBtSheetShown = showBSheet) {
+            DisplayFloatingActionBtn(isBtSheetShown = showBSheet) {
 
-          }
+            }
         }, modifier = Modifier.fillMaxSize()){ innerPadding->
             //TODO:- TOP APP BAR WITH A TODOLIST NAME ON IT
-         Column(modifier = Modifier.padding(innerPadding)) {
-
+         LazyColumn(modifier = Modifier.padding(innerPadding).padding(12.dp)) {
+ item {
+     IndividualRow(todoItem = TodoItem("Assi1", false)) {
+         isDoen = true }
+     IndividualRow(todoItem = TodoItem("Assi1", false)) {
+         isDoen = true }
+     IndividualRow(todoItem = TodoItem("Assi1", false)) {
+         isDoen = true }
+     IndividualRow(todoItem = TodoItem("Assi1", false)) {
+         isDoen = true }
+ }
          }
 
         }
     }
 }
-@Composable fun FloatingActionBtn(isBtSheetShown : Boolean, showbuttonSheet : ()-> Unit){
-
-    FloatingActionButton(modifier = Modifier
-        .shadow(12.dp, shape = RoundedCornerShape(19.dp)) , containerColor = Color(red = 232, green = 210, blue = 255),
-onClick = showbuttonSheet ) {
 
 
-        Icon(modifier = Modifier
 
-            .fillMaxWidth(.1f), painter = painterResource(id = R.drawable.add_icon), contentDescription = "add")
-
-
-    }
-}
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     Assignment1Theme {
-MainUI( )
+
     }
 }

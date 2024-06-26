@@ -1,3 +1,3 @@
-data class TodoItem(var item: String, var idDone:Boolean) {
+data class TodoItem(var name: String, var isDone:Boolean) {
 
 }
