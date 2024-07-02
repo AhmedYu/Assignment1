@@ -15,6 +15,12 @@ import TodoItem
 import androidx.compose.foundation.layout.Arrangement
 import com.ahmed.assignment1.ui.theme.PurpleGrey80
 
+/**
+ * create individual row with TodoItem
+ * @param TodoItem : data class with two properties
+ * @param isDone : flag for the todoitem completion status
+ * @togleDone : a function or lambda to toggle the completion statatus.
+ */
 @Composable
 fun IndividualRow(item: TodoItem, isDone: Boolean, togleDone: (Boolean) -> Unit) {
 	Row(
