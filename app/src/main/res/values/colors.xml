@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="add_button_color">#E8D2FF</color>
+    <color name="bottom_sheet_color">#F6EEFA</color>
 </resources>

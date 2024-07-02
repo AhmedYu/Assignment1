@@ -2,4 +2,9 @@
     <string name="app_name">Assignment1</string>
     <string name="cancel_button">Cancel</string>
     <string name="save_button">Save</string>
-</resources>
+    <string name="top_bar_title">Todo</string>
+    <string name="textField_placeholder">New Todo</string>
+    <string name="x_icon_text">x icon to clear text</string>
+    <string name="entry_error_message">please enter value in the text field </string>
+ <string name="add">add new item</string>
+ </resources>
