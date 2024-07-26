@@ -1,5 +1,6 @@
 package com.ahmed.assignment1
 
+import AccountCreationAndLogin.LoginScreen
 import components.DisplayFloatingActionBtn
 import components.IndividualRow
 import android.os.Bundle
@@ -38,7 +39,7 @@ import components.BtmContent
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.ime
 import androidx.compose.ui.Alignment
-import data.changeTodoItemStatus
+import data.changeTodoStatus
 import data.todoList
 
 class MainActivity : ComponentActivity() {
@@ -49,8 +50,7 @@ class MainActivity : ComponentActivity() {
 		enableEdgeToEdge()
 		setContent {
 
-
-			MainUI()
+MainUI()
 		}
 	}
 }
@@ -110,8 +110,8 @@ fun MainUI() {
 			//TODO:- TOP APP BAR WITH A TODOLIST NAME ON IT
 			LazyColumn(
 				modifier = Modifier
-                    .padding(innerPadding)
-                    .padding(12.dp)
+					.padding(innerPadding)
+					.padding(12.dp)
 			) {
 
 				item {
@@ -119,8 +119,8 @@ fun MainUI() {
 						Row(
 							modifier = Modifier
 
-                                .fillMaxWidth()
-                                .background(color = PurpleGrey80),
+								.fillMaxWidth()
+								.background(color = PurpleGrey80),
 							verticalAlignment = Alignment.CenterVertically,
 							horizontalArrangement = Arrangement.Center
 						)
@@ -128,7 +128,7 @@ fun MainUI() {
 							isDone = item.isDone //isolates each items doneStatus so that when
 							IndividualRow(item = item, isDone = isDone) {
 								isDone = it
-								changeTodoItemStatus(item)
+								changeTodoStatus(item)
 							}
 
 
