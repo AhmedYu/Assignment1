@@ -23,7 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.ahmed.assignment1.R
 import com.ahmed.assignment1.ui.theme.Purple40
-import createNewTodoIem
+import data.createNewTodoIem
 
 @Composable
 fun BtmContent(

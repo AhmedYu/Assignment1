@@ -1,4 +1,4 @@
-import data.todoList
+package data
 
 data class Todo(var name: String, var isDone: Boolean)
 

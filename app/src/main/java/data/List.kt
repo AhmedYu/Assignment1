@@ -1,7 +1,5 @@
 package data
 
-import Todo
-
 var todoList: MutableList<Todo> = mutableListOf(
 	Todo("Assignment1", true),
 	Todo("Assignment2", false),
