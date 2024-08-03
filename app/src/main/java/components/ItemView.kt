@@ -11,7 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
-import TodoItem
+import data.Todo
 import androidx.compose.foundation.layout.Arrangement
 import com.ahmed.assignment1.ui.theme.PurpleGrey80
 
@@ -22,7 +22,7 @@ import com.ahmed.assignment1.ui.theme.PurpleGrey80
  * @togleDone : a function or lambda to toggle the completion statatus.
  */
 @Composable
-fun IndividualRow(item: TodoItem, isDone: Boolean, togleDone: (Boolean) -> Unit) {
+fun IndividualRow(item: Todo, isDone: Boolean, togleDone: (Boolean) -> Unit) {
 	Row(
 		modifier = Modifier
 

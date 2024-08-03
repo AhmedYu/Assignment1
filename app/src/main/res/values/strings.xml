@@ -7,4 +7,13 @@
     <string name="x_icon_text">x icon to clear text</string>
     <string name="entry_error_message">please enter value in the text field </string>
  <string name="add">add new item</string>
+    <string name="apiKey">13df1beb-cc3b-4b4c-8716-50a8d83126c4</string>
+    <string name="loginBTN">Log in</string>
+    <string name="createBTN">Create an account</string>
+    <string name="emailLable">Email Address</string>
+    <string name="emeilPlaceHolder">test@todo.com</string>
+    <string name="passwordLable">Password</string>
+    <string name="passwordPlaceHolder">Password1</string>
+    <string name="nameLable">Name</string>
+
  </resources>
