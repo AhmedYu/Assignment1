@@ -1,4 +1,4 @@
-package AccountCreationAndLogin
+package accountCreationAndLogin
 
 import LoginCreateAccount.LogInSignUpViewModel
 import androidx.compose.foundation.layout.Column
@@ -29,24 +29,31 @@ import com.ahmed.assignment1.ui.theme.Purple40
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(navigateToCreateAccount : ()-> Unit){
+fun LoginScreen( toSignUpScreen : ()-> Unit){
 	var loginSignUpViewModel = LogInSignUpViewModel()
 	Scaffold(topBar = {
-		TopAppBar(title = { Text(modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center, fontWeight = FontWeight.Bold, text =  "Login") })
+		TopAppBar(title = { Text(modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center, fontWeight = FontWeight.Bold, text =  stringResource(
+			id = R.string.top_bar_title
+		)) })
 	},  containerColor =  MaterialTheme.colorScheme.surfaceColorAtElevation(23.dp)) { innerPadding ->
 
-		Column(modifier = Modifier.padding(innerPadding)
+		Column(modifier = Modifier
+			.padding(innerPadding)
 			.fillMaxWidth()
 			.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
 			Spacer(modifier = Modifier.padding(top = 23.dp))
 			OutlinedTextField(value = "", onValueChange = {
 
-			},  modifier = Modifier.fillMaxWidth(0.9F).padding(horizontal = 1.dp, vertical = 12.dp), label = {Text(text = stringResource(id = R.string.emailLable))}, placeholder = {
+			},  modifier = Modifier
+				.fillMaxWidth(0.9F)
+				.padding(horizontal = 1.dp, vertical = 12.dp), label = {Text(text = stringResource(id = R.string.emailLable))}, placeholder = {
 				Text(text = stringResource(id = R.string.emeilPlaceHolder))
 			})
 
 			Spacer(modifier = Modifier.padding(top = 23.dp))
-			OutlinedTextField(value = "", onValueChange = { },  modifier = Modifier.fillMaxWidth(0.9F)	.padding(horizontal = 1.dp, vertical = 12.dp), label = {Text(text = stringResource(id = R.string.passwordLable))}, placeholder = {
+			OutlinedTextField(value = "", onValueChange = { },  modifier = Modifier
+				.fillMaxWidth(0.9F)
+				.padding(horizontal = 1.dp, vertical = 12.dp), label = {Text(text = stringResource(id = R.string.passwordLable))}, placeholder = {
 				Text(text = stringResource(id = R.string.passwordPlaceHolder))
 			}, visualTransformation = PasswordVisualTransformation())
 			Spacer(modifier = Modifier.padding(top = 40.dp))
@@ -61,7 +68,9 @@ fun LoginScreen(navigateToCreateAccount : ()-> Unit){
 			}
 			Spacer(modifier = Modifier.padding(top = 23.dp))
 
-			OutlinedButton(modifier = Modifier.fillMaxWidth(0.9F).padding(horizontal = 16.dp, vertical = 12.dp), onClick = navigateToCreateAccount) {
+			OutlinedButton(modifier = Modifier
+				.fillMaxWidth(0.9F)
+				.padding(horizontal = 16.dp, vertical = 12.dp), onClick =  toSignUpScreen) {
 //text on the button
 				Text(text = stringResource(id = R.string.createBTN))
 			}

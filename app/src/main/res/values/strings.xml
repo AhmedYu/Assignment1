@@ -14,6 +14,7 @@
     <string name="emeilPlaceHolder">test@todo.com</string>
     <string name="passwordLable">Password</string>
     <string name="passwordPlaceHolder">Password1</string>
+    <string name="registrationURL">https://todos.simpleapi.dev/api/users/register?</string>
     <string name="nameLable">Name</string>
-
+<string name="userURL">https://todos.simpleapi.dev/api/users/</string>
  </resources>

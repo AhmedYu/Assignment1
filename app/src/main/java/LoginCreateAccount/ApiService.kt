@@ -1,13 +1,22 @@
 package LoginCreateAccount
-//interface ApiService {
-// suspend getTodos(@Query()apiKey:String,
-//		@Header("Authorization")bearerToken:String,
-//		@Path("userId") userId:String,
-//		):List<Todo>
-//	suspend editTodo(@Query("apiKey") apiKey:String,
-//	@Header("Authorization")bearerToken:String,
-//	@Path("userId") userId:String,
-//	@Path("todoId") todoId:String,
-//		@Body todo:Todo):Todo
-//
-//}
+
+import data.Todo
+import android.media.session.MediaSession.Token
+import retrofit2.http.Body
+import retrofit2.http.Header
+import retrofit2.http.Path
+import retrofit2.http.Query
+
+interface ApiService {
+public suspend fun getTodos(@Query("apiKey") apiKey:String,
+							@Header("Authorization") bearerToken: String,
+							@Path("userId") userId: String):List<Todo>
+public suspend fun editTodo(
+	@Query("apiKey") apiKey:String,
+	@Header("Authorization") bearerToken: String,
+	@Path("userId") userId: String,
+	@Path("todoId") todoId:String,
+	@Body todo:Todo
+):Todo
+
+}
