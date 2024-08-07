@@ -1,5 +1,5 @@
 package data
 
 enum class Screens {
-LoginScreen, SignUpScreen, TodoListScreen
+LoginScreen, RegistrationScreen, TodoListScreen
 }

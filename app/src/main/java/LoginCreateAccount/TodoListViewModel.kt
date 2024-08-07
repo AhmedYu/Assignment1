@@ -24,4 +24,8 @@ class TodoListViewModel : ViewModel(), ApiService {
 	): Todo {
 		TODO("Not yet implemented")
 	}
+
+	override suspend fun getUser(apiKey: String) {
+		TODO("Not yet implemented")
+	}
 }

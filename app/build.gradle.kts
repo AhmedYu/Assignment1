@@ -52,9 +52,14 @@ android {
 dependencies {
     val nav_version = "2.7.7"
 
-    implementation("androidx.navigation:navigation-compose:$nav_version")
+    implementation(libs.androidx.navigation.compose)
     // Retrofit
     implementation(libs.retrofit)
+    implementation(libs.androidx.lifecycle.runtime.ktx.v241)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.material3)
+    implementation(libs.ui)
+    implementation(libs.ui.tooling.preview)
 // Retrofit with Scalar Converter
     implementation(libs.converter.scalars)
     implementation(libs.androidx.core.ktx)

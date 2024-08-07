@@ -1,7 +1,6 @@
 package LoginCreateAccount
 
 import data.Todo
-import android.media.session.MediaSession.Token
 import retrofit2.http.Body
 import retrofit2.http.Header
 import retrofit2.http.Path
@@ -18,5 +17,6 @@ public suspend fun editTodo(
 	@Path("todoId") todoId:String,
 	@Body todo:Todo
 ):Todo
-
+public suspend fun getUser(@Query("apiKey")  apiKey: String,
+						   )
 }

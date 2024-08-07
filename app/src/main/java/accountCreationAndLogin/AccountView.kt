@@ -1,26 +1,26 @@
-package AccountCreationAndLogin
+package accountCreationAndLogin
 
-import LoginCreateAccount.LogInSignUpViewModel
-import android.util.Log
+import LoginCreateAccount.RegistrationModelView
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import kotlin.math.log
+import data.Screens
 
 @Composable
 fun AccountView() {
 	val navController = rememberNavController()
-	val loginSignupViewModel = LogInSignUpViewModel()
-	NavHost(navController = navController, startDestination = "CreateAccountView") {
-	 composable("CreateAccountView"){
-		 CreateAccountView {
-			 navController.navigate("LoginScreen")
-		 }
+	val registrationModelView = RegistrationModelView()
+	NavHost(navController = navController, startDestination = "RegistrationScreen") {
+	 composable("RegistrationScreen"){
+		 RegistrationScreen(navigateToLogin = {
+			 navController.navigate(Screens.LoginScreen.name)
+		 }, registrationModelView = registrationModelView )
+
 	 }
 		composable("LoginScreen"){
-		 CreateAccountView {
-			 navController.navigate("CreateAccountView")
+		 accountCreationAndLogin.LoginScreen {
+			 navController.navigate("RegistrationScreen")
 		 }
 	 }
 
