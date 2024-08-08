@@ -5,7 +5,7 @@
     <string name="top_bar_title">Todo</string>
     <string name="textField_placeholder">New Todo</string>
     <string name="x_icon_text">x icon to clear text</string>
-    <string name="entry_error_message">please enter value in the text field </string>
+    <string name="entry_error_message">Make sure all the fields are filled </string>
  <string name="add">add new item</string>
     <string name="apiKey">13df1beb-cc3b-4b4c-8716-50a8d83126c4</string>
     <string name="loginBTN">Log in</string>
@@ -14,6 +14,11 @@
     <string name="emeilPlaceHolder">test@todo.com</string>
     <string name="passwordLable">Password</string>
     <string name="passwordPlaceHolder">Password1</string>
+    <string name="registrationURL">https://todos.simpleapi.dev/api/users/register?</string>
     <string name="nameLable">Name</string>
-
+    <string name="emptyEntryMessage">
+        all the fields should be filled before supmission!!
+    </string>
+    <string name="ok">OK</string>
+<string name="userURL">https://todos.simpleapi.dev/api/users/</string>
  </resources>

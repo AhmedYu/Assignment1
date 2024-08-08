@@ -1,6 +1,6 @@
 package accountCreationAndLogin
 
-import LoginCreateAccount.LogInSignUpViewModel
+import LoginCreateAccount.RegistrationModelView
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -10,21 +10,22 @@ import data.Screens
 @Composable
 fun AccountView() {
 	val navController = rememberNavController()
-	val loginSignupViewModel = LogInSignUpViewModel()
-	NavHost(navController = navController, startDestination = Screens.SignUpScreen.name) {
-	composable(route =  Screens.SignUpScreen.name){
+	val registrationModelView = RegistrationModelView()
+	NavHost(navController = navController, startDestination = "RegistrationScreen") {
+	 composable("RegistrationScreen"){
+		 RegistrationScreen(navigateToLogin = {
+			 navController.navigate(Screens.LoginScreen.name)
+		 }, registrationModelView = registrationModelView )
 
-		SignUpScreen {
-			navController.navigate(Screens.LoginScreen.name)
+	 }
+		composable("LoginScreen"){
+		 accountCreationAndLogin.LoginScreen {
+			 navController.navigate("RegistrationScreen")
+		 }
+	 }
 
-		}
+
 	}
-		composable(Screens.LoginScreen.name){
-			LoginScreen {
-				navController.navigate(Screens.SignUpScreen.name)
-			}
-		}
-}
 }
 
 

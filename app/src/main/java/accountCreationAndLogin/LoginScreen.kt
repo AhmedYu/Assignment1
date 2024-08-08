@@ -1,6 +1,6 @@
 package accountCreationAndLogin
 
-import LoginCreateAccount.LogInSignUpViewModel
+import LoginCreateAccount.RegistrationModelView
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,7 +30,7 @@ import com.ahmed.assignment1.ui.theme.Purple40
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen( toSignUpScreen : ()-> Unit){
-	var loginSignUpViewModel = LogInSignUpViewModel()
+	var loginSignUpViewModelView = RegistrationModelView()
 	Scaffold(topBar = {
 		TopAppBar(title = { Text(modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center, fontWeight = FontWeight.Bold, text =  stringResource(
 			id = R.string.top_bar_title
