@@ -17,6 +17,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -26,11 +30,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.ahmed.assignment1.R
 import com.ahmed.assignment1.ui.theme.Purple40
+import components.DisplayAlertForEmptyEntry
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen( toSignUpScreen : ()-> Unit){
+fun LoginScreen( toSignUpScreen : ()-> Unit, navigateTodoList : ()-> Unit){
 	var loginSignUpViewModelView = RegistrationModelView()
+	var 	displayAlert by remember {
+		mutableStateOf(false)
+	}
 	Scaffold(topBar = {
 		TopAppBar(title = { Text(modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center, fontWeight = FontWeight.Bold, text =  stringResource(
 			id = R.string.top_bar_title
@@ -62,7 +70,17 @@ fun LoginScreen( toSignUpScreen : ()-> Unit){
 				.padding(horizontal = 16.dp, vertical = 12.dp),
 				colors = ButtonDefaults.buttonColors(containerColor = Purple40),
 				onClick = {
+					if (registrationModelView.validateEntries()) {
+						// Proceed with account creation
+						registrationModelView.createAcount()
+						displayAlert = false
+					 navigateTodoList()
 
+
+					} else {
+
+						displayAlert = true
+					}
 				}) {
 				Text(text = stringResource(id = R.string.loginBTN))
 			}
@@ -76,7 +94,15 @@ fun LoginScreen( toSignUpScreen : ()-> Unit){
 			}
 
 		}
+		DisplayAlertForEmptyEntry(displayAlert =  displayAlert, message = stringResource(
+			id = R.string.emptyEntryMessage
+		)
 
+		) {
+			displayAlert = false
+
+
+		}
 	}
 
 }

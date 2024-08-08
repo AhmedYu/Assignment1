@@ -35,7 +35,7 @@ import components.DisplayAlertForEmptyEntry
 var registrationModelView = RegistrationModelView()
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RegistrationScreen(navigateToLogin: () -> Unit, registrationModelView: RegistrationModelView  ) {
+fun RegistrationScreen(navigateToLogin: () -> Unit, registrationModelView: RegistrationModelView , navigateToTodoListScreen : ()-> Unit ) {
 
 	var name by remember {
 		mutableStateOf(registrationModelView.name.value ?: "")
@@ -137,6 +137,7 @@ fun RegistrationScreen(navigateToLogin: () -> Unit, registrationModelView: Regis
 						// Proceed with account creation
 						registrationModelView.createAcount()
 					displayAlert = false
+						navigateToTodoListScreen()
 
 
 					} else {
@@ -174,13 +175,7 @@ fun RegistrationScreen(navigateToLogin: () -> Unit, registrationModelView: Regis
 
 	}
 
-	fun clearFields(){
-		{
-			name = ""
-			email = ""
-			password = ""
-		}
-	}
+
 
 }
 

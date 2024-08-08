@@ -9,7 +9,6 @@ import retrofit2.Call
 
 
 class RegistrationModelView: ViewModel() , UserService {
-	var generalViewModel = GeneralViewModel()
 
 	var name = MutableLiveData("")
 	var email  = MutableLiveData("")

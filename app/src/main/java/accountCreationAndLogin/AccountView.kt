@@ -15,15 +15,20 @@ fun AccountView() {
 	 composable("RegistrationScreen"){
 		 RegistrationScreen(navigateToLogin = {
 			 navController.navigate(Screens.LoginScreen.name)
-		 }, registrationModelView = registrationModelView )
+		 }, registrationModelView = registrationModelView , navigateToTodoListScreen = {
+			 navController.navigate(Screens.TodoListScreen.name)
+		 })
 
 	 }
 		composable("LoginScreen"){
-		 accountCreationAndLogin.LoginScreen {
-			 navController.navigate("RegistrationScreen")
+		 LoginScreen(toSignUpScreen = {navController.navigate(Screens.RegistrationScreen.name) }) {
+			 navController.navigate(Screens.TodoListScreen.name)
 		 }
 	 }
 
+composable(Screens.TodoListScreen.name){
+	TodoListScreen()
+}
 
 	}
 }
