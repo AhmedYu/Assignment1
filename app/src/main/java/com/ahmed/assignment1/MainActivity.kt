@@ -1,9 +1,9 @@
 package com.ahmed.assignment1
 
 
-import LoginCreateAccount.GeneralViewModel
-import accountCreationAndLogin.AccountView
-import LoginCreateAccount.RegistrationModelView
+import viewModels.GeneralViewModel
+import UserInterfaces.AccountView
+import viewModels.RegistrationModelView
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent

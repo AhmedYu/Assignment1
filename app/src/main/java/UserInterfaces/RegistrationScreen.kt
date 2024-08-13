@@ -1,7 +1,7 @@
-package accountCreationAndLogin
+package UserInterfaces
 
 
-import LoginCreateAccount.RegistrationModelView
+import viewModels.RegistrationModelView
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -35,16 +35,16 @@ import components.DisplayAlertForEmptyEntry
 var registrationModelView = RegistrationModelView()
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RegistrationScreen(navigateToLogin: () -> Unit, registrationModelView: RegistrationModelView , navigateToTodoListScreen : ()-> Unit ) {
+fun RegistrationScreen(navigateToLogin: () -> Unit, registrationModelView: RegistrationModelView, navigateToTodoListScreen : ()-> Unit ) {
 
 	var name by remember {
-		mutableStateOf(registrationModelView.name.value ?: "")
+		mutableStateOf(  registrationModelView.nameTextFieldValue.value?:"")
 	}
 	var email by remember {
-		mutableStateOf(registrationModelView.email.value ?: "")
+		mutableStateOf(registrationModelView.emailTextField.value?:"")
 	}
 	var password by remember {
-		mutableStateOf(registrationModelView.password.value?:"")
+		mutableStateOf(registrationModelView.passwordTextField.value?: "")
 	}
 	var displayAlert by remember {
 		mutableStateOf(false)
@@ -68,7 +68,7 @@ fun RegistrationScreen(navigateToLogin: () -> Unit, registrationModelView: Regis
 
 			OutlinedTextField(value = name , onValueChange = {
 					name = it
-				registrationModelView.name.postValue(it)
+				registrationModelView.updateNameTextFieldValue(it)
 
 
 			}, modifier = Modifier
@@ -82,10 +82,10 @@ fun RegistrationScreen(navigateToLogin: () -> Unit, registrationModelView: Regis
 			Spacer(modifier = Modifier.padding(top = 23.dp))
 
 			OutlinedTextField(
-				value =  email,
+				value = email,
 				onValueChange = {
 					email = it
-					registrationModelView.email.postValue(it)
+					registrationModelView.updateEmail(it)
 
 
 				},
@@ -109,7 +109,7 @@ fun RegistrationScreen(navigateToLogin: () -> Unit, registrationModelView: Regis
 				onValueChange = {
 
 
-					registrationModelView.password.value = it
+					registrationModelView.updatePassword(it)
 					password = it
 				},
 				modifier = Modifier
@@ -137,6 +137,7 @@ fun RegistrationScreen(navigateToLogin: () -> Unit, registrationModelView: Regis
 						// Proceed with account creation
 						registrationModelView.createAcount()
 					displayAlert = false
+						registrationModelView.resetErrors()
 						navigateToTodoListScreen()
 
 
@@ -168,6 +169,7 @@ fun RegistrationScreen(navigateToLogin: () -> Unit, registrationModelView: Regis
 		)
 
 		) {
+			registrationModelView.resetErrors()
 			displayAlert = false
 
 
