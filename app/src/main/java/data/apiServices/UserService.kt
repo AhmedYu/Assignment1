@@ -1,4 +1,4 @@
-package UserInterfaces
+package data.apiServices
 
 import retrofit2.http.Body
 

@@ -2,8 +2,8 @@ package com.ahmed.assignment1
 
 
 import viewModels.GeneralViewModel
-import UserInterfaces.AccountView
-import viewModels.RegistrationModelView
+ import UserInterfaces.RegistrationLoginNavigation
+import viewModels.CreateAccountViewModel
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -13,14 +13,14 @@ import androidx.navigation.compose.rememberNavController
 
 
 class MainActivity : ComponentActivity() {
-private var loginSignUpModelView = RegistrationModelView()
+private var loginSignUpModelView = CreateAccountViewModel()
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 
 		super.onCreate(savedInstanceState)
 		enableEdgeToEdge()
 		setContent {
-AccountView()
+Main()
 		}
 	}
 }
@@ -30,6 +30,6 @@ fun Main(){
 	val navController  = rememberNavController()
 
 
-
+RegistrationLoginNavigation()
 
 }

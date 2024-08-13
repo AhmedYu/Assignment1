@@ -1,7 +1,7 @@
 package UserInterfaces
 
 
-import viewModels.RegistrationModelView
+import viewModels.CreateAccountViewModel
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -32,19 +32,24 @@ import androidx.compose.ui.unit.dp
 import com.ahmed.assignment1.R
 import com.ahmed.assignment1.ui.theme.Purple40
 import components.DisplayAlertForEmptyEntry
-var registrationModelView = RegistrationModelView()
+
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RegistrationScreen(navigateToLogin: () -> Unit, registrationModelView: RegistrationModelView, navigateToTodoListScreen : ()-> Unit ) {
+fun RegistrationScreen(
+	navigateToLogin: () -> Unit,
+	createAccountViewModel: CreateAccountViewModel,
+	navigateToTodoListScreen: () -> Unit
+) {
 
 	var name by remember {
-		mutableStateOf(  registrationModelView.nameTextFieldValue.value?:"")
+		mutableStateOf(createAccountViewModel.nameTextFieldValue.value ?: "")
 	}
 	var email by remember {
-		mutableStateOf(registrationModelView.emailTextField.value?:"")
+		mutableStateOf(createAccountViewModel.emailTextField.value ?: "")
 	}
 	var password by remember {
-		mutableStateOf(registrationModelView.passwordTextField.value?: "")
+		mutableStateOf(createAccountViewModel.passwordTextField.value ?: "")
 	}
 	var displayAlert by remember {
 		mutableStateOf(false)
@@ -66,15 +71,21 @@ fun RegistrationScreen(navigateToLogin: () -> Unit, registrationModelView: Regis
 				.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally
 		) {
 
-			OutlinedTextField(value = name , onValueChange = {
+			OutlinedTextField(value = name,
+				onValueChange = {
 					name = it
-				registrationModelView.updateNameTextFieldValue(it)
+					createAccountViewModel.updateNameTextFieldValue(it)
 
 
-			}, modifier = Modifier
-				.fillMaxWidth(0.9F)
-				.padding(horizontal = 1.dp, vertical = 12.dp), label = { Text(text = stringResource(id = R.string.nameLable)) }, placeholder = { Text(text = stringResource(id = R.string.nameLable)) }, isError = registrationModelView.isNameError.value == true, supportingText = {
-					if (registrationModelView.isNameError.value == true) {
+				},
+				modifier = Modifier
+					.fillMaxWidth(0.9F)
+					.padding(horizontal = 1.dp, vertical = 12.dp),
+				label = { Text(text = stringResource(id = R.string.nameLable)) },
+				placeholder = { Text(text = stringResource(id = R.string.nameLable)) },
+				isError = createAccountViewModel.isNameError.value == true,
+				supportingText = {
+					if (createAccountViewModel.isNameError.value == true) {
 						Text(text = stringResource(id = R.string.entry_error_message))
 					}
 				})
@@ -85,7 +96,8 @@ fun RegistrationScreen(navigateToLogin: () -> Unit, registrationModelView: Regis
 				value = email,
 				onValueChange = {
 					email = it
-					registrationModelView.updateEmail(it)
+
+					createAccountViewModel.updateEmail(it)
 
 
 				},
@@ -94,11 +106,15 @@ fun RegistrationScreen(navigateToLogin: () -> Unit, registrationModelView: Regis
 					.padding(horizontal = 1.dp, vertical = 12.dp),
 				label = { Text(text = stringResource(id = R.string.emailLable)) },
 				placeholder = { Text(text = stringResource(id = R.string.emeilPlaceHolder)) },
-				isError = registrationModelView.isEmailError.value == true,
+				isError = createAccountViewModel.isEmailError.value == true,
 				supportingText = {
-					if (registrationModelView.isEmailError.value == true) {
+					if (createAccountViewModel.isEmailError.value == true) {
 						Text(text = stringResource(id = R.string.entry_error_message))
 					}
+				if(email.isNotEmpty() && !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() ){
+					  Text(text = stringResource(id = R.string.entry_email_error_message))
+
+				  }
 				}
 			)
 
@@ -109,7 +125,7 @@ fun RegistrationScreen(navigateToLogin: () -> Unit, registrationModelView: Regis
 				onValueChange = {
 
 
-					registrationModelView.updatePassword(it)
+					createAccountViewModel.updatePassword(it)
 					password = it
 				},
 				modifier = Modifier
@@ -118,9 +134,9 @@ fun RegistrationScreen(navigateToLogin: () -> Unit, registrationModelView: Regis
 				label = { Text(text = stringResource(id = R.string.passwordLable)) },
 				placeholder = { Text(text = stringResource(id = R.string.passwordPlaceHolder)) },
 				visualTransformation = PasswordVisualTransformation(),
-				isError = registrationModelView.isPasswordError.value == true,
+				isError = createAccountViewModel.isPasswordError.value == true,
 				supportingText = {
-					if (registrationModelView.isPasswordError.value == true) {
+					if (createAccountViewModel.isPasswordError.value == true) {
 						Text(text = stringResource(id = R.string.entry_error_message))
 					}
 				}
@@ -133,11 +149,11 @@ fun RegistrationScreen(navigateToLogin: () -> Unit, registrationModelView: Regis
 					.padding(horizontal = 16.dp, vertical = 12.dp),
 				colors = ButtonDefaults.buttonColors(containerColor = Purple40),
 				onClick = {
-					if (registrationModelView.validateEntries()) {
+					if (createAccountViewModel.validateEntries()) {
 						// Proceed with account creation
-						registrationModelView.createAcount()
-					displayAlert = false
-						registrationModelView.resetErrors()
+						createAccountViewModel.createAcount()
+						displayAlert = false
+						createAccountViewModel.resetErrors()
 						navigateToTodoListScreen()
 
 
@@ -157,26 +173,29 @@ fun RegistrationScreen(navigateToLogin: () -> Unit, registrationModelView: Regis
 					.fillMaxWidth(0.9F)
 					.padding(horizontal = 16.dp, vertical = 12.dp), onClick = navigateToLogin
 			) {
-				Text(text = stringResource(id = R.string.loginBTN))
-			}
+				createAccountViewModel.clearTextFields()
 
+				Text(text = stringResource(id = R.string.loginBTN))
+
+			}
 
 
 		}
 
-		DisplayAlertForEmptyEntry(displayAlert =  displayAlert, message = stringResource(
-			id = R.string.emptyEntryMessage
-		)
+		DisplayAlertForEmptyEntry(
+			displayAlert = displayAlert, message = stringResource(
+				id = R.string.emptyEntryMessage
+			)
 
 		) {
-			registrationModelView.resetErrors()
+			createAccountViewModel.resetErrors()
 			displayAlert = false
 
 
 		}
 
-	}
 
+	}
 
 
 }

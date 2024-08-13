@@ -1,7 +1,7 @@
 package viewModels
 
-import UserInterfaces.UserService
-import android.util.Log
+import androidx.compose.ui.res.stringResource
+import data.apiServices.UserService
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,14 +9,13 @@ import data.User
 import retrofit2.Call
 
 
-class RegistrationModelView: ViewModel() , UserService {
-val TAG = "Value From TextFields"
+class CreateAccountViewModel: ViewModel() , UserService {
+
 	private var  email  = MutableLiveData("")
 	private var password = MutableLiveData("")
   var isNameError = MutableLiveData(false)
   var isEmailError = MutableLiveData(false)
 	var isPasswordError  = MutableLiveData(false)
-
 	private var name = MutableLiveData("")
 	val nameTextFieldValue : LiveData<String> get() = name
 	val passwordTextField : LiveData<String> = password
@@ -33,12 +32,11 @@ val emailTextField : LiveData<String> = email
 
 	fun validateEntries(): Boolean {
 		var valid = true
-		Log.d(TAG, "validateEntries: ${emailTextField.value}")
-		if (name.value.isNullOrEmpty()) {
+ 		if (name.value.isNullOrEmpty()) {
 			isNameError.value = true
 			valid = false
 		}
-		if (email.value.isNullOrEmpty()) {
+		if (email.value.isNullOrEmpty() ) {
 			isEmailError.value = true
 			valid = false
 		}
@@ -46,6 +44,8 @@ val emailTextField : LiveData<String> = email
 			isPasswordError.value = true
 			valid = false
 		}
+
+
 		return valid
 	}
 
@@ -66,4 +66,11 @@ val emailTextField : LiveData<String> = email
 		TODO("Not yet implemented")
 
 	}
+	fun clearTextFields(){
+		name.value = ""
+		email.value = ""
+		password.value =  ""
+
+	}
+
 }
