@@ -74,7 +74,7 @@ fun RegistrationScreen(
 			OutlinedTextField(value = name,
 				onValueChange = {
 					name = it
-					createAccountViewModel.updateNameTextFieldValue(it)
+					createAccountViewModel.updateNameTextFieldValue(name)
 
 
 				},
@@ -97,7 +97,7 @@ fun RegistrationScreen(
 				onValueChange = {
 					email = it
 
-					createAccountViewModel.updateEmail(it)
+					createAccountViewModel.updateEmail(email)
 
 
 				},
@@ -111,7 +111,7 @@ fun RegistrationScreen(
 					if (createAccountViewModel.isEmailError.value == true) {
 						Text(text = stringResource(id = R.string.entry_error_message))
 					}
-				if(email.isNotEmpty() && !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() ){
+					if( email.isNotBlank() && !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() ){
 					  Text(text = stringResource(id = R.string.entry_email_error_message))
 
 				  }
@@ -153,7 +153,6 @@ fun RegistrationScreen(
 						// Proceed with account creation
 						createAccountViewModel.createAcount()
 						displayAlert = false
-						createAccountViewModel.resetErrors()
 						navigateToTodoListScreen()
 
 
@@ -173,7 +172,7 @@ fun RegistrationScreen(
 					.fillMaxWidth(0.9F)
 					.padding(horizontal = 16.dp, vertical = 12.dp), onClick = navigateToLogin
 			) {
-				createAccountViewModel.clearTextFields()
+
 
 				Text(text = stringResource(id = R.string.loginBTN))
 

@@ -1,5 +1,6 @@
 package viewModels
 
+import android.util.Log
 import androidx.compose.ui.res.stringResource
 import data.apiServices.UserService
 import androidx.lifecycle.LiveData
@@ -9,34 +10,41 @@ import data.User
 import retrofit2.Call
 
 
-class CreateAccountViewModel: ViewModel() , UserService {
-
-	private var  email  = MutableLiveData("")
+class CreateAccountViewModel : ViewModel(), UserService {
+val TAG = "value From textField:"
+	private var email = MutableLiveData("")
 	private var password = MutableLiveData("")
-  var isNameError = MutableLiveData(false)
-  var isEmailError = MutableLiveData(false)
-	var isPasswordError  = MutableLiveData(false)
+	var isNameError = MutableLiveData(false)
+	var isEmailError = MutableLiveData(false)
+	var isPasswordError = MutableLiveData(false)
 	private var name = MutableLiveData("")
-	val nameTextFieldValue : LiveData<String> get() = name
-	val passwordTextField : LiveData<String> = password
-val emailTextField : LiveData<String> = email
+	val nameTextFieldValue: LiveData<String> get() = name
+	val passwordTextField: LiveData<String> = password
+	val emailTextField: LiveData<String> = email
 
-	fun updatePassword(value:String){
+	fun updatePassword(value: String) {
 		password.value = value
+
 	}
-	fun updateEmail(value:String){
+
+	fun updateEmail(value: String) {
+
 		email.value = value
 	}
 
+	fun updateNameTextFieldValue(value: String) {
+		name.value = value
 
-
+	}
 	fun validateEntries(): Boolean {
 		var valid = true
- 		if (name.value.isNullOrEmpty()) {
+
+		if (name.value.isNullOrEmpty()) {
+			Log.d(TAG, "In the If: ${name.value}")
 			isNameError.value = true
 			valid = false
 		}
-		if (email.value.isNullOrEmpty() ) {
+		if (email.value.isNullOrEmpty()) {
 			isEmailError.value = true
 			valid = false
 		}
@@ -54,10 +62,10 @@ val emailTextField : LiveData<String> = email
 		isEmailError.value = false
 		isPasswordError.value = false
 	}
-	fun updateNameTextFieldValue(value : String){
-		name.value = value
-	}
-	fun createAcount(){
+
+
+
+	fun createAcount() {
 		// TODO: call do the api registration
 
 	}
@@ -66,10 +74,11 @@ val emailTextField : LiveData<String> = email
 		TODO("Not yet implemented")
 
 	}
-	fun clearTextFields(){
+
+	fun clearTextFields() {
 		name.value = ""
 		email.value = ""
-		password.value =  ""
+		password.value = ""
 
 	}
 

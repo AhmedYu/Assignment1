@@ -50,7 +50,8 @@ android {
 }
 
 dependencies {
-    val nav_version = "2.7.7"
+    testImplementation(libs.junit.jupiter)
+	val nav_version = "2.7.7"
 
     implementation(libs.androidx.navigation.compose)
     // Retrofit

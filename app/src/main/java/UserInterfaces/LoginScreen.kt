@@ -139,7 +139,6 @@ fun LoginScreen( logInViewMode: LogInViewMode,  toSignUpScreen: () -> Unit, navi
 			) {
 //text on the button
 				Text(text = stringResource(id = R.string.createBTN))
-				logInViewMode.clearTextFields()
 			}
 
 		}
