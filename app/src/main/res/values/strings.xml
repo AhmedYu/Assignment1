@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Assignment1</string>
+    <string name="app_name">Todo</string>
     <string name="cancel_button">Cancel</string>
     <string name="save_button">Save</string>
     <string name="top_bar_title">Todo</string>
@@ -16,6 +16,7 @@
     <string name="passwordPlaceHolder">Password1</string>
     <string name="registrationURL">https://todos.simpleapi.dev/api/users/register?</string>
     <string name="nameLable">Name</string>
+    <string name="entry_email_error_message">The email format is not correct. eg: emailaddress@live.com</string>
     <string name="emptyEntryMessage">
         all the fields should be filled before supmission!!
     </string>

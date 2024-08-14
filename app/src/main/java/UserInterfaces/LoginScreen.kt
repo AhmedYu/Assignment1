@@ -1,7 +1,5 @@
-package accountCreationAndLogin
+package UserInterfaces
 
-
-import LoginCreateAccount.RegistrationModelView
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -32,60 +30,50 @@ import androidx.compose.ui.unit.dp
 import com.ahmed.assignment1.R
 import com.ahmed.assignment1.ui.theme.Purple40
 import components.DisplayAlertForEmptyEntry
-var registrationModelView = RegistrationModelView()
+import viewModels.LogInViewMode
+import kotlin.math.log
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RegistrationScreen(navigateToLogin: () -> Unit, registrationModelView: RegistrationModelView  ) {
-
-	var name by remember {
-		mutableStateOf(registrationModelView.name.value ?: "")
-	}
-	var email by remember {
-		mutableStateOf(registrationModelView.email.value ?: "")
-	}
-	var password by remember {
-		mutableStateOf(registrationModelView.password.value?:"")
-	}
+fun LoginScreen( logInViewMode: LogInViewMode,  toSignUpScreen: () -> Unit, navigateTodoList: () -> Unit) {
+//code clean up
 	var displayAlert by remember {
 		mutableStateOf(false)
 	}
+	var email by remember {
+		mutableStateOf(logInViewMode.emailTextField.value ?: "")
+	}
+	var password by remember {
+		mutableStateOf(logInViewMode.passwordTextField.value ?: "")
+	}
+
 	Scaffold(topBar = {
 		TopAppBar(title = {
 			Text(
 				modifier = Modifier.fillMaxWidth(),
 				textAlign = TextAlign.Center,
 				fontWeight = FontWeight.Bold,
-				text = stringResource(id = R.string.app_name)
+				text = stringResource(
+					id = R.string.top_bar_title
+				)
 			)
 		})
 	}, containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(23.dp)) { innerPadding ->
+
 		Column(
 			modifier = Modifier
 				.padding(innerPadding)
 				.fillMaxWidth()
 				.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally
 		) {
-
-			OutlinedTextField(value = name , onValueChange = {
-					name = it
-				registrationModelView.name.postValue(it)
-
-
-			}, modifier = Modifier
-				.fillMaxWidth(0.9F)
-				.padding(horizontal = 1.dp, vertical = 12.dp), label = { Text(text = stringResource(id = R.string.nameLable)) }, placeholder = { Text(text = stringResource(id = R.string.nameLable)) }, isError = registrationModelView.isNameError.value == true, supportingText = {
-					if (registrationModelView.isNameError.value == true) {
-						Text(text = stringResource(id = R.string.entry_error_message))
-					}
-				})
-
 			Spacer(modifier = Modifier.padding(top = 23.dp))
 
 			OutlinedTextField(
-				value =  email,
+				value = email,
 				onValueChange = {
 					email = it
-					registrationModelView.email.postValue(it)
+
+					logInViewMode.updateEmail(it)
 
 
 				},
@@ -94,94 +82,77 @@ fun RegistrationScreen(navigateToLogin: () -> Unit, registrationModelView: Regis
 					.padding(horizontal = 1.dp, vertical = 12.dp),
 				label = { Text(text = stringResource(id = R.string.emailLable)) },
 				placeholder = { Text(text = stringResource(id = R.string.emeilPlaceHolder)) },
-				isError = registrationModelView.isEmailError.value == true,
+				isError = logInViewMode.isEmailError.value == true,
 				supportingText = {
-					if (registrationModelView.isEmailError.value == true) {
+					if (logInViewMode.isEmailError.value == true) {
 						Text(text = stringResource(id = R.string.entry_error_message))
+					}
+					if(email.isNotEmpty() && !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() ){
+						Text(text = stringResource(id = R.string.entry_email_error_message))
+
 					}
 				}
 			)
 
 			Spacer(modifier = Modifier.padding(top = 23.dp))
-
-			OutlinedTextField(
-				value = password,
-				onValueChange = {
-
-
-					registrationModelView.password.value = it
-					password = it
-				},
+			OutlinedTextField(value = password,
+				onValueChange = { logInViewMode.updatePassword(it)
+								password = it},
 				modifier = Modifier
 					.fillMaxWidth(0.9F)
 					.padding(horizontal = 1.dp, vertical = 12.dp),
 				label = { Text(text = stringResource(id = R.string.passwordLable)) },
-				placeholder = { Text(text = stringResource(id = R.string.passwordPlaceHolder)) },
-				visualTransformation = PasswordVisualTransformation(),
-				isError = registrationModelView.isPasswordError.value == true,
-				supportingText = {
-					if (registrationModelView.isPasswordError.value == true) {
-						Text(text = stringResource(id = R.string.entry_error_message))
-					}
-				}
+				placeholder = {
+					Text(text = stringResource(id = R.string.passwordPlaceHolder))
+				},
+				visualTransformation = PasswordVisualTransformation()
 			)
-
 			Spacer(modifier = Modifier.padding(top = 40.dp))
-			Button(
-				modifier = Modifier
-					.fillMaxWidth(0.9F)
-					.padding(horizontal = 16.dp, vertical = 12.dp),
+			Button(modifier = Modifier
+				.fillMaxWidth(0.9F)
+				.padding(horizontal = 16.dp, vertical = 12.dp),
 				colors = ButtonDefaults.buttonColors(containerColor = Purple40),
 				onClick = {
-					if (registrationModelView.validateEntries()) {
+					if (logInViewMode.validateEntries()) {
 						// Proceed with account creation
-						registrationModelView.createAcount()
-					displayAlert = false
+//					logInViewMode.Login()
+						displayAlert = false
+//						logInViewMode reset the error
+						navigateTodoList()
 
 
-					} else {
+
+					}
+					else {
 
 						displayAlert = true
 					}
-				}
-			) {
-				Text(text = stringResource(id = R.string.createBTN))
+				}) {
+				Text(text = stringResource(id = R.string.loginBTN))
 			}
-
 			Spacer(modifier = Modifier.padding(top = 23.dp))
 
 			OutlinedButton(
 				modifier = Modifier
 					.fillMaxWidth(0.9F)
-					.padding(horizontal = 16.dp, vertical = 12.dp), onClick = navigateToLogin
+					.padding(horizontal = 16.dp, vertical = 12.dp), onClick = toSignUpScreen
 			) {
-				Text(text = stringResource(id = R.string.loginBTN))
+//text on the button
+				Text(text = stringResource(id = R.string.createBTN))
+				logInViewMode.clearTextFields()
 			}
 
-
-
 		}
-
-		DisplayAlertForEmptyEntry(displayAlert =  displayAlert, message = stringResource(
-			id = R.string.emptyEntryMessage
-		)
+		DisplayAlertForEmptyEntry(
+			displayAlert = displayAlert, message = stringResource(
+				id = R.string.emptyEntryMessage
+			)
 
 		) {
 			displayAlert = false
 
 
 		}
-
-	}
-
-	fun clearFields(){
-		{
-			name = ""
-			email = ""
-			password = ""
-		}
 	}
 
 }
-
-
