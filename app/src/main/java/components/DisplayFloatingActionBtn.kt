@@ -12,6 +12,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.ahmed.assignment1.R
+import com.ahmed.assignment1.R.drawable.add
 
 /**
  * floating action btn will be displayed by this function
@@ -30,7 +31,7 @@ fun DisplayFloatingActionBtn(
 	) {
 		Icon(
 			modifier = Modifier.fillMaxWidth(.1f),
-			painter = painterResource(id = R.drawable.add_24dp_fill0_wght400_grad0_opsz24),
+			painter = painterResource(id = R.drawable.add),
 			contentDescription = stringResource(id = R.string.add)
 		)
 

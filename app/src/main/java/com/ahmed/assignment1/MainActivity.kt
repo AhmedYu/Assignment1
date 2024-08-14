@@ -3,17 +3,14 @@ package com.ahmed.assignment1
 
 import viewModels.GeneralViewModel
  import UserInterfaces.RegistrationLoginNavigation
-import viewModels.CreateAccountViewModel
-import android.os.Bundle
+ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.rememberNavController
 
-
 class MainActivity : ComponentActivity() {
-private var loginSignUpModelView = CreateAccountViewModel()
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 

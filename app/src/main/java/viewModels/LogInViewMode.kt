@@ -3,8 +3,9 @@ package viewModels
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import data.User
 
-class LogInViewMode {
+class LogInViewMode(private var user: User) {
 	val TAG = "Value From TextFields"
  	private var email = MutableLiveData("")
 	private var password = MutableLiveData("")

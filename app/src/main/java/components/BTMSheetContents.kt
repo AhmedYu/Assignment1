@@ -51,7 +51,7 @@ fun BtmContent(
 			trailingIcon = {
 				IconButton(onClick = { changeEntry("") }) {
 					Icon(
-						painter = painterResource(id = R.drawable.cancel_24dp_fill0_wght400_grad0_opsz24),
+						painter = painterResource(id = R.drawable.cancell),
 						contentDescription = stringResource(id = R.string.x_icon_text), tint =
 						(if (isDisplayErrorMessage && entry.isEmpty()) Color.Red else Color.Gray)
 					)

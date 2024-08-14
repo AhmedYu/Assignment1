@@ -6,13 +6,16 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import data.Screens
+import data.User
+import data.apiServices.UserService
 import viewModels.LogInViewMode
 
 @Composable
 fun RegistrationLoginNavigation() {
-	val logInViewMode = LogInViewMode()
+	val logInViewMode = LogInViewMode(user= User("","",""))
 	val navController = rememberNavController()
-	val createAccountViewModel = CreateAccountViewModel()
+
+	val createAccountViewModel = CreateAccountViewModel(User("","",""))
 	NavHost(navController = navController, startDestination = "RegistrationScreen") {
 		composable("RegistrationScreen") {
 			RegistrationScreen(navigateToLogin = {
