@@ -36,7 +36,7 @@ import kotlin.math.log
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen( logInViewMode: LogInViewMode,  toSignUpScreen: () -> Unit, navigateTodoList: () -> Unit) {
-
+//code clean up
 	var displayAlert by remember {
 		mutableStateOf(false)
 	}
