@@ -26,14 +26,16 @@ fun IndividualRow(item: Todo, isDone: Boolean, togleDone: (Boolean) -> Unit) {
 	Row(
 		modifier = Modifier
 
-            .fillMaxWidth()
-            .background(color = PurpleGrey80),
+			.fillMaxWidth()
+			.background(color = PurpleGrey80),
 		verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center
 	)
 	{
-		Text(text = item.name, modifier = Modifier
-            .fillMaxWidth(.88f)
-            .padding(start = 5.dp))
+		Text(
+			text = item.name, modifier = Modifier
+				.fillMaxWidth(.88f)
+				.padding(start = 5.dp)
+		)
 		Checkbox(
 			modifier = Modifier,
 			enabled = true,

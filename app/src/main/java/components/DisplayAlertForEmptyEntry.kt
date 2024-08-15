@@ -1,5 +1,7 @@
 package components
 
+import androidx.compose.material.icons.*
+
 import android.graphics.drawable.Icon
 import com.ahmed.assignment1.R
 import androidx.compose.foundation.background
@@ -27,7 +29,7 @@ fun DisplayAlertForEmptyEntry(displayAlert: Boolean, message: String, dismiss: (
 		AlertDialog(
 			icon = {
 				androidx.compose.material3.Icon(
-					painter = painterResource(id = R.drawable.warning_24dp_5f6368_fill0_wght400_grad0_opsz24),
+					painter = painterResource(id = R.drawable.baseline_add_24),
 					contentDescription = "warning icon",
 					tint = Color.Red,
 					modifier = Modifier.size(width = 40.dp, height = 40.dp)

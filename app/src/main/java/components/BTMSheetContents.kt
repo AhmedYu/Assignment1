@@ -1,5 +1,7 @@
 package components
 
+import androidx.compose.material.icons.*
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -35,9 +37,9 @@ fun BtmContent(
 
 	Column(
 		modifier = Modifier
-            .fillMaxSize()
-            .fillMaxWidth()
-            .padding(top = 12.dp),
+			.fillMaxSize()
+			.fillMaxWidth()
+			.padding(top = 12.dp),
 		horizontalAlignment = Alignment.CenterHorizontally,
 		verticalArrangement = Arrangement.spacedBy(20.dp)
 	) {
@@ -51,7 +53,7 @@ fun BtmContent(
 			trailingIcon = {
 				IconButton(onClick = { changeEntry("") }) {
 					Icon(
-						painter = painterResource(id = R.drawable.cancell),
+						painter = painterResource(id = R.drawable.baseline_add_24),
 						contentDescription = stringResource(id = R.string.x_icon_text), tint =
 						(if (isDisplayErrorMessage && entry.isEmpty()) Color.Red else Color.Gray)
 					)
@@ -77,8 +79,8 @@ fun BtmContent(
 
 
 		Button(modifier = Modifier
-            .fillMaxWidth(0.9F)
-            .padding(horizontal = 16.dp, vertical = 12.dp),
+			.fillMaxWidth(0.9F)
+			.padding(horizontal = 16.dp, vertical = 12.dp),
 			colors = ButtonDefaults.buttonColors(containerColor = Purple40),
 			onClick = {
 				//create new item withe the new entry

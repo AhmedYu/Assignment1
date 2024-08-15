@@ -111,10 +111,12 @@ fun RegistrationScreen(
 					if (createAccountViewModel.isEmailError.value == true) {
 						Text(text = stringResource(id = R.string.entry_error_message))
 					}
-					if( email.isNotBlank() && !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() ){
-					  Text(text = stringResource(id = R.string.entry_email_error_message))
+					if (email.isNotBlank() && !android.util.Patterns.EMAIL_ADDRESS.matcher(email)
+							.matches()
+					) {
+						Text(text = stringResource(id = R.string.entry_email_error_message))
 
-				  }
+					}
 				}
 			)
 

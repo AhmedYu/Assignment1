@@ -2,8 +2,8 @@ package com.ahmed.assignment1
 
 
 import viewModels.GeneralViewModel
- import UserInterfaces.RegistrationLoginNavigation
- import android.os.Bundle
+import UserInterfaces.RegistrationLoginNavigation
+import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -17,16 +17,17 @@ class MainActivity : ComponentActivity() {
 		super.onCreate(savedInstanceState)
 		enableEdgeToEdge()
 		setContent {
-Main()
+			Main()
 		}
 	}
 }
+
 @Composable
-fun Main(){
+fun Main() {
 	val generalModelView = GeneralViewModel()
-	val navController  = rememberNavController()
+	val navController = rememberNavController()
 
 
-RegistrationLoginNavigation()
+	RegistrationLoginNavigation()
 
 }

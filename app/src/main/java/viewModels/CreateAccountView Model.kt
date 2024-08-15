@@ -10,8 +10,8 @@ import data.User
 import retrofit2.Call
 
 
-class CreateAccountViewModel(private var user :User) : ViewModel(), UserService {
-val TAG = "value From textField:"
+class CreateAccountViewModel(private var user: User) : ViewModel(), UserService {
+	val TAG = "value From textField:"
 
 	private var email = MutableLiveData("")
 	private var password = MutableLiveData("")
@@ -37,6 +37,7 @@ val TAG = "value From textField:"
 		name.value = value
 
 	}
+
 	fun validateEntries(): Boolean {
 		var valid = true
 
@@ -65,10 +66,9 @@ val TAG = "value From textField:"
 	}
 
 
-
 	fun createAcount() {
 		// TODO: call do the api registration
-	user = User(email= email.value, password = password.value?: "", name = name.value?: "")
+		user = User(email = email.value, password = password.value ?: "", name = name.value ?: "")
 
 	}
 

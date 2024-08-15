@@ -12,10 +12,10 @@ import viewModels.LogInViewMode
 
 @Composable
 fun RegistrationLoginNavigation() {
-	val logInViewMode = LogInViewMode(user= User("","",""))
+	val logInViewMode = LogInViewMode(user = User("", "", ""))
 	val navController = rememberNavController()
 
-	val createAccountViewModel = CreateAccountViewModel(User("","",""))
+	val createAccountViewModel = CreateAccountViewModel(User("", "", ""))
 	NavHost(navController = navController, startDestination = "RegistrationScreen") {
 		composable("RegistrationScreen") {
 			RegistrationScreen(navigateToLogin = {
@@ -26,7 +26,10 @@ fun RegistrationLoginNavigation() {
 
 		}
 		composable("LoginScreen") {
-			LoginScreen(toSignUpScreen = { navController.navigate(Screens.RegistrationScreen.name) }, logInViewMode = logInViewMode) {
+			LoginScreen(
+				toSignUpScreen = { navController.navigate(Screens.RegistrationScreen.name) },
+				logInViewMode = logInViewMode
+			) {
 				navController.navigate(Screens.TodoListScreen.name)
 			}
 		}
