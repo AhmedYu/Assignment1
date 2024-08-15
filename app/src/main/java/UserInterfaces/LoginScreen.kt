@@ -35,7 +35,11 @@ import kotlin.math.log
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen( logInViewMode: LogInViewMode,  toSignUpScreen: () -> Unit, navigateTodoList: () -> Unit) {
+fun LoginScreen(
+	logInViewMode: LogInViewMode,
+	toSignUpScreen: () -> Unit,
+	navigateTodoList: () -> Unit
+) {
 //code clean up
 	var displayAlert by remember {
 		mutableStateOf(false)
@@ -87,7 +91,9 @@ fun LoginScreen( logInViewMode: LogInViewMode,  toSignUpScreen: () -> Unit, navi
 					if (logInViewMode.isEmailError.value == true) {
 						Text(text = stringResource(id = R.string.entry_error_message))
 					}
-					if(email.isNotEmpty() && !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() ){
+					if (email.isNotEmpty() && !android.util.Patterns.EMAIL_ADDRESS.matcher(email)
+							.matches()
+					) {
 						Text(text = stringResource(id = R.string.entry_email_error_message))
 
 					}
@@ -95,9 +101,12 @@ fun LoginScreen( logInViewMode: LogInViewMode,  toSignUpScreen: () -> Unit, navi
 			)
 
 			Spacer(modifier = Modifier.padding(top = 23.dp))
-			OutlinedTextField(value = password,
-				onValueChange = { logInViewMode.updatePassword(it)
-								password = it},
+			OutlinedTextField(
+				value = password,
+				onValueChange = {
+					logInViewMode.updatePassword(it)
+					password = it
+				},
 				modifier = Modifier
 					.fillMaxWidth(0.9F)
 					.padding(horizontal = 1.dp, vertical = 12.dp),
@@ -121,9 +130,7 @@ fun LoginScreen( logInViewMode: LogInViewMode,  toSignUpScreen: () -> Unit, navi
 						navigateTodoList()
 
 
-
-					}
-					else {
+					} else {
 
 						displayAlert = true
 					}
@@ -139,7 +146,6 @@ fun LoginScreen( logInViewMode: LogInViewMode,  toSignUpScreen: () -> Unit, navi
 			) {
 //text on the button
 				Text(text = stringResource(id = R.string.createBTN))
-				logInViewMode.clearTextFields()
 			}
 
 		}

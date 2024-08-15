@@ -1,5 +1,8 @@
 package components
 
+import androidx.compose.material.icons.*
+
+
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.FloatingActionButton
@@ -30,7 +33,7 @@ fun DisplayFloatingActionBtn(
 	) {
 		Icon(
 			modifier = Modifier.fillMaxWidth(.1f),
-			painter = painterResource(id = R.drawable.add_24dp_fill0_wght400_grad0_opsz24),
+			painter = painterResource(id = R.drawable.baseline_add_24),
 			contentDescription = stringResource(id = R.string.add)
 		)
 

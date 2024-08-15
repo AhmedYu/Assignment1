@@ -1,5 +1,5 @@
 package data
 
-data class User constructor(private var email: String?,  private var password: String, private var name: String? ) {
+data class User constructor(var email: String?, var password: String, var name: String? ) {
 
 }

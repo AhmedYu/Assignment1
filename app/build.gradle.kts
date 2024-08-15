@@ -1,3 +1,4 @@
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -29,6 +30,12 @@ android {
             )
         }
     }
+    tasks.withType<Test> {
+        useJUnitPlatform()
+        testLogging {
+            events("passed",  "failed")
+        }
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -50,9 +57,22 @@ android {
 }
 
 dependencies {
+
+    testImplementation(libs.junit.jupiter)
     val nav_version = "2.7.7"
 
     implementation(libs.androidx.navigation.compose)
+    testImplementation(libs.junit)
+    testImplementation (libs.mockk.v1135) // or your preferred version
+
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
+    testImplementation(libs.mockk.vversion)
+
     // Retrofit
     implementation(libs.retrofit)
     implementation(libs.androidx.lifecycle.runtime.ktx.v241)

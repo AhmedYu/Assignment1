@@ -39,121 +39,121 @@ import data.changeTodoStatus
 import data.todoList
 
 
+/**
+ * the function creates the app entry point by calling individual UI Components
+ * The components are in Component package
+ *          -contains :
+ *              -Buttons
+ *              -UI view Functions
+ */
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TodoListScreen() {
+	//check box flag to set the todo item's completion status
+	var isDone by remember {
+		mutableStateOf(false)
+	}
 
-	/**
-	 * the function creates the app entry point by calling individual UI Components
-	 * The components are in Component package
-	 *          -contains :
-	 *              -Buttons
-	 *              -UI view Functions
-	 */
-	@OptIn(ExperimentalMaterial3Api::class)
-	@Composable
-	fun  TodoListScreen(){
-		//check box flag to set the todo item's completion status
-		var isDone by remember {
-			mutableStateOf(false)
-		}
-
-		val sheetState = rememberModalBottomSheetState()
-		var isBtSheetShown by remember { //to dismiss the btm sheet and show it
-			mutableStateOf(false)
-		}
-		//stores value from the text field
-		var entry by remember {
-			mutableStateOf("")
-		}
-		var isDisplayErrorMessage by remember { //to display error messages when it is true
-			mutableStateOf(
-				false
-			)
-		}
+	val sheetState = rememberModalBottomSheetState()
+	var isBtSheetShown by remember { //to dismiss the btm sheet and show it
+		mutableStateOf(false)
+	}
+	//stores value from the text field
+	var entry by remember {
+		mutableStateOf("")
+	}
+	var isDisplayErrorMessage by remember { //to display error messages when it is true
+		mutableStateOf(
+			false
+		)
+	}
 
 
-		Assignment1Theme {
-			Scaffold(
-				topBar = {
-					CenterAlignedTopAppBar(
-						title = {
-							Text(text = stringResource(id = R.string.top_bar_title))
-						},
-						colors = TopAppBarDefaults.topAppBarColors(
-							containerColor = PurpleGrey80,
-							contentColorFor(
-								PurpleGrey80
-							)
-						),
-					)
-				}, floatingActionButton =
-				{
+	Assignment1Theme {
+		Scaffold(
+			topBar = {
+				CenterAlignedTopAppBar(
+					title = {
+						Text(text = stringResource(id = R.string.top_bar_title))
+					},
+					colors = TopAppBarDefaults.topAppBarColors(
+						containerColor = PurpleGrey80,
+						contentColorFor(
+							PurpleGrey80
+						)
+					),
+				)
+			}, floatingActionButton =
+			{
 
-					DisplayFloatingActionBtn {
-						isBtSheetShown = true
+				DisplayFloatingActionBtn {
+					isBtSheetShown = true
+				}
+			}, modifier = Modifier.fillMaxSize()
+		) { innerPadding ->
+			//TODO:- TOP APP BAR WITH A TODOLIST NAME ON IT
+			LazyColumn(
+				modifier = Modifier
+					.padding(innerPadding)
+					.padding(12.dp)
+			) {
+
+				item {
+					for (item in todoList) {
+						Row(
+							modifier = Modifier
+
+								.fillMaxWidth()
+								.background(color = PurpleGrey80),
+							verticalAlignment = Alignment.CenterVertically,
+							horizontalArrangement = Arrangement.Center
+						)
+						{
+							isDone = item.isDone //isolates each items doneStatus so that when
+							IndividualRow(item = item, isDone = isDone) {
+								isDone = it
+								changeTodoStatus(item)
+							}
+
+
+						}
 					}
-				}, modifier = Modifier.fillMaxSize()
-			) { innerPadding ->
-				//TODO:- TOP APP BAR WITH A TODOLIST NAME ON IT
-				LazyColumn(
-					modifier = Modifier
-						.padding(innerPadding)
-						.padding(12.dp)
+
+
+				}
+			}
+
+		}
+		Box(
+			modifier = Modifier
+				.fillMaxWidth()
+				.fillMaxHeight(0.9F)
+		) {
+			if (isBtSheetShown) {
+				ModalBottomSheet(
+					modifier = Modifier.background(color = colorResource(id = R.color.bottom_sheet_color)),
+					windowInsets = WindowInsets.ime,
+
+
+					onDismissRequest = {
+						isBtSheetShown = false
+					}, sheetState = sheetState
 				) {
 
-					item {
-						for (item in todoList) {
-							Row(
-								modifier = Modifier
-
-									.fillMaxWidth()
-									.background(color = PurpleGrey80),
-								verticalAlignment = Alignment.CenterVertically,
-								horizontalArrangement = Arrangement.Center
-							)
-							{
-								isDone = item.isDone //isolates each items doneStatus so that when
-								IndividualRow(item = item, isDone = isDone) {
-									isDone = it
-									changeTodoStatus(item)
-								}
-
-
-							}
-						}
-
-
-					}
-				}
-
-			}
-			Box(
-				modifier = Modifier
-					.fillMaxWidth()
-					.fillMaxHeight(0.9F)
-			) {
-				if (isBtSheetShown) {
-					ModalBottomSheet(modifier = Modifier.background(color = colorResource(id = R.color.bottom_sheet_color)),
-						windowInsets = WindowInsets.ime,
-
-
-						onDismissRequest = {
-							isBtSheetShown = false
-						}, sheetState = sheetState
+					//the content goes here.
+					BtmContent(
+						changeDisplayErrorText = { isDisplayErrorMessage = it },
+						changeBtmSheetStatus = { isBtSheetShown = false },
+						entry = entry, isBtSheetShown = isBtSheetShown,
+						isDisplayErrorMessage = isDisplayErrorMessage
 					) {
-
-						//the content goes here.
-						BtmContent(
-							changeDisplayErrorText = { isDisplayErrorMessage = it },
-							changeBtmSheetStatus = { isBtSheetShown = false },
-							entry = entry, isBtSheetShown = isBtSheetShown,
-							isDisplayErrorMessage = isDisplayErrorMessage
-						) {
-							entry = it
-						}
+						entry = it
 					}
 				}
 			}
 		}
 	}
+}
 
 
 

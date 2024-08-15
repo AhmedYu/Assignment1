@@ -3,10 +3,11 @@ package viewModels
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import data.User
 
-class LogInViewMode {
+class LogInViewMode(private var user: User) {
 	val TAG = "Value From TextFields"
- 	private var email = MutableLiveData("")
+	private var email = MutableLiveData("")
 	private var password = MutableLiveData("")
 	var isEmailError = MutableLiveData(false)
 	var isPasswordError = MutableLiveData(false)
@@ -25,7 +26,7 @@ class LogInViewMode {
 	fun validateEntries(): Boolean {
 		var valid = true
 		Log.d(TAG, "validateEntries: ${emailTextField.value}")
-		if (email.value.isNullOrEmpty()   ) {
+		if (email.value.isNullOrEmpty()) {
 			isEmailError.value = true
 			valid = false
 		}
@@ -35,10 +36,11 @@ class LogInViewMode {
 		}
 		return valid
 	}
-	fun clearTextFields(){
+
+	fun clearTextFields() {
 
 		email.value = ""
-		password.value =  ""
+		password.value = ""
 
 	}
 }
